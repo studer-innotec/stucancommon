@@ -34,6 +34,9 @@ class PythonCanDriver:
         else:
             self.can_bus = can.interface.Bus(bitrate=bitrate)
 
+    def __del__(self):
+        self.can_bus.shutdown()
+
     def receive(self, timeout=100):
         """
         Read a message on the CAN bus, waiting block
